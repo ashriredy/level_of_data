@@ -13,7 +13,7 @@ dev.off()
 options(scipen=999)
 rm(list=ls()); cat("\014")
 
-
+#### Reeading Datasets #### 
 
 
 a = read.csv("C:/Users/Ashrith Reddy/Desktop/Python Preparation/CreditScore.csv")
@@ -34,5 +34,6 @@ for(i in names(a)){
 
 
 #### JUNK ####
-Testing git
-
+# Pending tasks - 
+# Interactive reader  
+# 
