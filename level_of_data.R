@@ -16,8 +16,9 @@ rm(list=ls()); cat("\014")
 
 #### Reeading Datasets #### 
 # dataset = fread("dummy.csv")
-dataset = fread("POS_stage_1_v2.csv")
+dataset = fread("POS_stage_1_v2.csv") %>% setDF()
 
+#### Defining Functions #### 
 generate_column_combinations = function(dataset,n){
   utils::combn(names(dataset),n) %>% 
     t %>% 
@@ -27,28 +28,30 @@ generate_column_combinations = function(dataset,n){
 }
 
 check_for_level = function(dataset , column_combinations){
-  for(i in 1:nrow(column_combinations)){
+   j = 1
+  for(j in 1:nrow(column_combinations)){
     concatenated_combination = dataset %>% 
-      select(column_combinations[i,]) %>% 
+      select(column_combinations[j,]) %>% 
       tidyr::unite(concatenated,sep = ";;;") %>% 
       pull(concatenated)
     
     residual = length(concatenated_combination) -  length(unique(concatenated_combination))
     
-    cat(paste(column_combinations[i,],collapse = " x "),"----","residual:",residual,"\n")
+    cat(paste(column_combinations[j,],collapse = " x "),"----","residual:",residual,"\n")
     
     if(residual == 0){
-      message(paste(paste(column_combinations[i,],collapse = " x "),"IS A LEVEL"))
+      message(paste(paste(column_combinations[j,],collapse = " x "),"IS A LEVEL"))
     }else{
-      print(paste(paste(column_combinations[i,],collapse = " x "),"IS NOT A LEVEL"))
+      print(paste(paste(column_combinations[j,],collapse = " x "),"IS NOT A LEVEL"))
     }
     
     cat("\n")
-    rm(concatenated_combination,residual)
-    gc()
+    rm(concatenated_combination,residual);gc();
   }
 }
 
+#### Determine the level ####
+i = 2
 for(i in 1:ncol(dataset)){
   column_combinations = generate_column_combinations(dataset,i)
   check_for_level(dataset,column_combinations) 
@@ -116,6 +119,13 @@ for(i in 1:ncol(dataset)){
 
 
 
+
+
+
+
+
+
+
 #### JUNK ####
 # Pending tasks - 
 # Interactive reader  
@@ -144,7 +154,7 @@ fast accessging a column - check with microbenchmarking
 # aesthetics
 #print in red
 
-
+# selecting columns is being bottleneck
 # column names as first row
 # if c1 x c2 is a level, c1 x c2 x c3 shouldnt be the level
 
