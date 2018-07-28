@@ -15,7 +15,8 @@ options(scipen=999)
 rm(list=ls()); cat("\014")
 
 #### Reeading Datasets #### 
-dataset = fread("dummy.csv")
+# dataset = fread("dummy.csv")
+dataset = fread("POS_stage_1_v2.csv")
 
 generate_column_combinations = function(dataset,n){
   utils::combn(names(dataset),n) %>% 
@@ -27,47 +28,36 @@ generate_column_combinations = function(dataset,n){
 
 check_for_level = function(dataset , column_combinations){
   for(i in 1:nrow(column_combinations)){
-    vec = dataset %>% select(column_combinations[i,]) %>% 
-      tidyr::unite(concatenated,sep = ";;;") %>% pull(concatenated)
-    residual = length(vec) -  length(unique(vec))
+    concatenated_combination = dataset %>% 
+      select(column_combinations[i,]) %>% 
+      tidyr::unite(concatenated,sep = ";;;") %>% 
+      pull(concatenated)
+    
+    residual = length(concatenated_combination) -  length(unique(concatenated_combination))
+    
     cat(paste(column_combinations[i,],collapse = " x "),"----","residual:",residual,"\n")
+    
     if(residual == 0){
-      print(paste(paste(column_combinations[i,],collapse = " x "),"IS A LEVEL"))
+      message(paste(paste(column_combinations[i,],collapse = " x "),"IS A LEVEL"))
     }else{
       print(paste(paste(column_combinations[i,],collapse = " x "),"IS NOT A LEVEL"))
     }
-    cat("")
-  }
-  rm(i,vec,residual)
-}
-
-#### 2 - column level ####
-column_combinations = generate_column_combinations(dataset,2)  # Should return a dataset with column combinations (1 column)
-check_for_level(dataset,column_combinations) 
-
-
-
-
-
-
-
-
-
-#### 2 - column level ####
-i = names(dataset)[1]
-j = names(dataset)[2]
-for(i in names(dataset)){
-  for(j in names(dataset)){
-    vec = paste(dataset[[i]],dataset[[j]],sep = "~~~")
-    residual = length(vec) -  length(unique(vec))
-    cat(i,j,"-",residual,"\n")
-    if(residual == 0){
-      print(paste(i,j,"IS A LEVEL"))
-    }else{
-      print(paste(i,j,"IS NOT A LEVEL"))
-    }
+    
+    cat("\n")
+    rm(concatenated_combination,residual)
+    gc()
   }
 }
+
+for(i in 1:ncol(dataset)){
+  column_combinations = generate_column_combinations(dataset,i)
+  check_for_level(dataset,column_combinations) 
+}
+
+
+
+
+
 
 
 
@@ -89,8 +79,8 @@ for(i in names(dataset)){
 
 
 #get column combinations
-column = combinations  = expand.grid(names(dataset),names(dataset)) %>% apply(MARGIN = 1,sort) %>% t %>% unique %>% as.data.frame() %>% 
-  filter(apply(.,MARGIN = 1, function(x) length(unique(x))!=1))
+# column = combinations  = expand.grid(names(dataset),names(dataset)) %>% apply(MARGIN = 1,sort) %>% t %>% unique %>% as.data.frame() %>% 
+#   filter(apply(.,MARGIN = 1, function(x) length(unique(x))!=1))
 
 
 
@@ -156,6 +146,7 @@ fast accessging a column - check with microbenchmarking
 
 
 # column names as first row
+# if c1 x c2 is a level, c1 x c2 x c3 shouldnt be the level
 
 
 # best-practices / tips and tricsk
