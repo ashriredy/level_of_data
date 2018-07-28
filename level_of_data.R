@@ -15,21 +15,43 @@ options(scipen=999)
 rm(list=ls()); cat("\014")
 
 #### Reeading Datasets #### 
-# dataset = fread("POS_stage_1_v2.csv")
 dataset = fread("dummy.csv")
 
-#### 1 - column level ####
-i = names(dataset)[1]
-for(i in names(dataset)){
-  vec = dataset[[i]]
-  residual = length(vec) -  length(unique(vec))
-  cat(i,"-",residual,"\n")
-  if(residual == 0){
-    print(paste(i,"IS A LEVEL"))
-  }else{
-    print(paste(i,"IS NOT A LEVEL"))
-  }
+generate_column_combinations = function(dataset,n){
+  utils::combn(names(dataset),n) %>% 
+    t %>% 
+    data.frame() %>% 
+    setNames(paste0("V",1:length(.))) %>% 
+    as.matrix()
 }
+
+check_for_level = function(dataset , column_combinations){
+  for(i in 1:nrow(column_combinations)){
+    vec = dataset %>% select(column_combinations[i,]) %>% 
+      tidyr::unite(concatenated,sep = ";;;") %>% pull(concatenated)
+    residual = length(vec) -  length(unique(vec))
+    cat(paste(column_combinations[i,],collapse = " x "),"----","residual:",residual,"\n")
+    if(residual == 0){
+      print(paste(paste(column_combinations[i,],collapse = " x "),"IS A LEVEL"))
+    }else{
+      print(paste(paste(column_combinations[i,],collapse = " x "),"IS NOT A LEVEL"))
+    }
+    cat("")
+  }
+  rm(i,vec,residual)
+}
+
+#### 2 - column level ####
+column_combinations = generate_column_combinations(dataset,2)  # Should return a dataset with column combinations (1 column)
+check_for_level(dataset,column_combinations) 
+
+
+
+
+
+
+
+
 
 #### 2 - column level ####
 i = names(dataset)[1]
@@ -108,6 +130,8 @@ column = combinations  = expand.grid(names(dataset),names(dataset)) %>% apply(MA
 # Pending tasks - 
 # Interactive reader  
 # Missing Values
+# cnames = names(dataset)
+# cnames %>% as.data.frame() %>% setNames(paste0("V",1:length(.)))
 
 
 # add assumptions #
@@ -126,9 +150,18 @@ fast accessging a column - check with microbenchmarking
 
 #readability
 # make a function out of everything
-
+# c1 x c2 x c3 - residual: 0  # insert tabs instead of space
 # aesthetics
 #print in red
 
 
 # column names as first row
+
+
+# best-practices / tips and tricsk
+# if datasets is large, try removing columns that are obviously not part of level
+# missing values
+
+# Additional features
+# drop columns feature
+
