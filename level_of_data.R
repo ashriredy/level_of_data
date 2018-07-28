@@ -34,7 +34,6 @@ for(i in names(dataset)){
 #### 2 - column level ####
 i = names(dataset)[1]
 j = names(dataset)[2]
-
 for(i in names(dataset)){
   for(j in names(dataset)){
     vec = paste(dataset[[i]],dataset[[j]],sep = "~~~")
@@ -45,10 +44,7 @@ for(i in names(dataset)){
     }else{
       print(paste(i,j,"IS NOT A LEVEL"))
     }
-    
   }
-  
-  
 }
 
 
@@ -70,7 +66,9 @@ for(i in names(dataset)){
 
 
 
-
+#get column combinations
+column = combinations  = expand.grid(names(dataset),names(dataset)) %>% apply(MARGIN = 1,sort) %>% t %>% unique %>% as.data.frame() %>% 
+  filter(apply(.,MARGIN = 1, function(x) length(unique(x))!=1))
 
 
 
@@ -126,5 +124,11 @@ gc
 unique fast
 fast accessging a column - check with microbenchmarking
 
+#readability
+# make a function out of everything
+
 # aesthetics
 #print in red
+
+
+# column names as first row
