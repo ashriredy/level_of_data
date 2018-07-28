@@ -1,0 +1,12 @@
+*
+
+!*.py
+!*.ipynb
+!*.r
+!.gitignore
+!*.md
+!*.html
+!*.txt
+!*.sql
+
+!*/
