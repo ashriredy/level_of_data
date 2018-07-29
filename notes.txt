@@ -1,3 +1,19 @@
+Readability
+
+
+Input Resilience
+
+
+Exception Handling
+
+
+Diffused Purpose
+
+
+Code Duplication
+Package list - 
+
+
 # Pending tasks - 
 # Interactive reader  
 # Missing Values
@@ -10,7 +26,7 @@
 
 # add assumptions #
 # csv only
-
+# No duplicate column names
 
 # if(nrow(unique(a)) == nrow(a)){
 #   unique_rows_flag = T
@@ -41,8 +57,4 @@ fast accessging a column - check with microbenchmarking
 # Additional features
 # drop columns feature
 
-
-#get column combinations
-# column = combinations  = expand.grid(names(dataset),names(dataset)) %>% apply(MARGIN = 1,sort) %>% t %>% unique %>% as.data.frame() %>% 
-#   filter(apply(.,MARGIN = 1, function(x) length(unique(x))!=1))
 

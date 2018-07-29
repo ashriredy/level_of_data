@@ -16,7 +16,7 @@ rm(list=ls()); cat("\014")
 
 #### Reeading Datasets #### 
 dataset = fread("dummy.csv")
-dataset = fread("POS_stage_1_v2.csv") %>% setDF()
+# dataset = fread("POS_stage_1_v2.csv") %>% setDF()
 
 #### Defining Functions #### 
 generate_column_combinations = function(dataset,n){
@@ -43,7 +43,6 @@ check_for_level = function(dataset , column_combinations){
     }else{
       print(paste(paste(column_combinations[j,],collapse = " x "),"IS NOT A LEVEL"))
     }
-    
     cat("\n")
     rm(concatenated_combination,residual);gc();
   }
@@ -54,3 +53,13 @@ for(i in 1:ncol(dataset)){
   column_combinations = generate_column_combinations(dataset,i)
   check_for_level(dataset,column_combinations) 
 }
+
+1:ncol(dataset) %>% sapply(function(x){
+  column_combinations = generate_column_combinations(dataset,x)
+  check_for_level(dataset,column_combinations)
+}) %>% invisible()
+
+
+
+
+
