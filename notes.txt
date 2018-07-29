@@ -1,17 +1,16 @@
-
-
-
-
-#### JUNK ####
 # Pending tasks - 
 # Interactive reader  
 # Missing Values
 # cnames = names(dataset)
 # cnames %>% as.data.frame() %>% setNames(paste0("V",1:length(.)))
-
+# Add instructions
+# Minimalistic code
+# Documentation
+# Github documentation
 
 # add assumptions #
-# csv only?
+# csv only
+
 
 # if(nrow(unique(a)) == nrow(a)){
 #   unique_rows_flag = T
