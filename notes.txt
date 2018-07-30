@@ -13,20 +13,22 @@ Diffused Purpose
 Code Duplication
 Package list - 
 
+Documentation
+Add assumptions
+	csv only
+	No duplicate column names
+Add instructions
 
-# Pending tasks - 
+Good to have
 # Interactive reader  
-# Missing Values
-# cnames = names(dataset)
-# cnames %>% as.data.frame() %>% setNames(paste0("V",1:length(.)))
-# Add instructions
 # Minimalistic code
-# Documentation
+
+
+
+# Missing Values
+
 # Github documentation
 
-# add assumptions #
-# csv only
-# No duplicate column names
 
 # if(nrow(unique(a)) == nrow(a)){
 #   unique_rows_flag = T
