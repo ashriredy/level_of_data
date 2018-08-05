@@ -1,14 +1,17 @@
 Readability
-
+# c1 x c2 x c3 - residual: 0  # insert tabs instead of space
+# aesthetics
+# print in red
+# change four hiphens to three
+# rename residuals to duplicates
 
 Input Resilience
-
+# Missing Values
+# safer seperator, replace ";;;"
 
 Exception Handling
 
-
 Diffused Purpose
-
 
 Code Duplication
 Package list - 
@@ -17,46 +20,19 @@ Documentation
 Add assumptions
 	csv only
 	No duplicate column names
+	Column names as first row
 Add instructions
 
 Good to have
 # Interactive reader  
 # Minimalistic code
-
-
-
-# Missing Values
-
 # Github documentation
-
-
-# if(nrow(unique(a)) == nrow(a)){
-#   unique_rows_flag = T
-# }
-# print(unique_rows_flag)
-
-#efficiency #
-data.table
-gc
-unique fast
-fast accessging a column - check with microbenchmarking
-
-#readability
-# make a function out of everything
-# c1 x c2 x c3 - residual: 0  # insert tabs instead of space
-# aesthetics
-#print in red
-
-# selecting columns is being bottleneck
-# column names as first row
-# if c1 x c2 is a level, c1 x c2 x c3 shouldnt be the level
-
-
-# best-practices / tips and tricsk
+# Full-dataset has duplicate rows, deduplicate and give a warning
 # if datasets is large, try removing columns that are obviously not part of level
-# missing values
-
-# Additional features
-# drop columns feature
-
-
+# missing values warning
+# drop some columns feature
+# if c1 x c2 is a level, c1 x c2 x c3 shouldnt be the level
+# selecting columns is being bottleneck
+# efficiency - data.table
+# efficiency - unique fast
+# efficiency - fast accessging a column
