@@ -7,8 +7,6 @@ if(!require("plyr")){install.packages("plyr",dependencies = T);library("plyr")}
 if(!require("beepr")){install.packages("beepr",dependencies = T);library("beepr")}
 if(!require("rstudioapi")){install.packages("rstudioapi",dependencies = T);library("rstudioapi")}
 gc()
-options(scipen = 999)
-setwd("C:/Users/Ashrith Reddy/Desktop/")
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 dev.off()
 options(scipen=999)
@@ -36,7 +34,7 @@ check_for_level = function(dataset , column_combinations){
     
     residual = length(concatenated_combination) -  length(unique(concatenated_combination))
     
-    cat(paste(column_combinations[j,],collapse = " x "),"----","residual:",residual,"\n")
+    cat(paste(column_combinations[j,],collapse = " x "),"----","residual:",format(residual,big.mark=","),"\n")
     
     if(residual == 0){
       message(paste(paste(column_combinations[j,],collapse = " x "),"IS A LEVEL"))
